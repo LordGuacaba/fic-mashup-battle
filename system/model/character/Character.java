@@ -49,8 +49,21 @@ public class Character {
         }
     }
 
+    public int getSpeed() {
+        return this.speed;
+    }
+
     public TurnState turnState() {
         return this.turnState;
+    }
+
+    public void startTurn() {
+        if (turnState == TurnState.RESTING) {
+            turnState = TurnState.READY;
+            notifyEffects();
+        } else {
+            throw new UnsupportedOperationException("Character unable to start turn");
+        }
     }
 
     @Override

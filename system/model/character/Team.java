@@ -41,6 +41,10 @@ public class Team {
         }
     }
 
+    public boolean isOnTeam(Character character) {
+        return this.active.contains(character);
+    }
+
     public boolean addCharacter(Character character) {
         if (active.size() > 4) {
             return false;
