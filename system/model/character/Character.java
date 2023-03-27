@@ -49,6 +49,10 @@ public class Character {
         }
     }
 
+    public TurnState turnState() {
+        return this.turnState;
+    }
+
     @Override
     public String toString() {
         String out = name + ": " + attack + " attack power, " + speed + " speed\n";
