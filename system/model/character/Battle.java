@@ -30,6 +30,15 @@ public class Battle {
         for (Character character : initialList) {
             turnOrder.add(character);
         }
+        startTurn();
+    }
+
+    public Team getAttackers() {
+        return this.attackers;
+    }
+
+    public Team getDefenders() {
+        return this.defenders;
     }
 
     public void startTurn() {

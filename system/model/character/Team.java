@@ -13,10 +13,12 @@ import java.util.Queue;
  */
 public class Team {
     
+    private String teamName;
     private List<Character> active;
     private final Queue<Character> knockedOut;
 
-    public Team() {
+    public Team(String name) {
+        this.teamName = name;
         this.active = new ArrayList<>();
         this.knockedOut = new ArrayDeque<>();
     }
