@@ -4,5 +4,6 @@ public enum TurnState {
     RESTING,
     READY,
     ATTACKING,
-    KNOCKED_OUT
+    KNOCKED_OUT,
+    NOT_BATTLING
 }
