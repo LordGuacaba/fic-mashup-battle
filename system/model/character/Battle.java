@@ -41,6 +41,10 @@ public class Battle {
         return this.defenders;
     }
 
+    public Character getTarget() {
+        return this.target;
+    }
+
     public void startTurn() {
         turnOrder.add(active);
         active = turnOrder.poll();

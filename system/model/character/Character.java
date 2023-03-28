@@ -18,6 +18,8 @@ public class Character {
     private final int attack;
     private double attackMod;
     private double defenseMod;
+    private final int maxHealth;
+    private int currentHealth;
     private final int speed;
     private Attack basicAttack;
     private Attack superAttack;
@@ -26,12 +28,14 @@ public class Character {
     private TurnState turnState;
     private List<StatusEffect> effects;
 
-    public Character(String name, List<String> affiliations, int attack, int speed) {
+    public Character(String name, List<String> affiliations, int attack, int maxHealth, int speed) {
         this.name = name;
         this.affiliations = affiliations;
         this.attack = attack;
+        this.maxHealth = maxHealth;
         this.speed = speed;
 
+        this.currentHealth = maxHealth;
         this.attackMod = 1;
         this.defenseMod = 1;
         this.basicAttack = null;
@@ -57,12 +61,32 @@ public class Character {
         return this.turnState;
     }
 
+    public int[] getHealth() {
+        int[] health = {currentHealth, maxHealth};
+        return health;
+    }
+
     public void startTurn() {
         if (turnState == TurnState.RESTING) {
             turnState = TurnState.READY;
             notifyEffects();
         } else {
             throw new UnsupportedOperationException("Character unable to start turn");
+        }
+    }
+
+    public void takeDamage(int damage) {
+        this.currentHealth -= damage;
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+            this.turnState = TurnState.KNOCKED_OUT;
+        }
+    }
+
+    public void heal(int health) {
+        this.currentHealth += health;
+        if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
         }
     }
 
