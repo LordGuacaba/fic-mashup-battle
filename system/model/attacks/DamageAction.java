@@ -11,22 +11,29 @@ import system.model.character.Character;
  */
 public class DamageAction implements AttackAction {
 
-    protected double damageModifier;
-    protected int currentDamage;
+    private double damageModifier;
+    private int currentDamage;
 
     public DamageAction(double damage) {
         this.damageModifier = damage;
         this.currentDamage = 1;
     }
     
+    /**
+     * Modifies the damage done by the attack.
+     * 
+     * @param modifier The damage multiplier - stacks onto previous effects.
+     */
     public void modifyDamage(double modifier) {
-        damageModifier *= modifier;
+        currentDamage *= modifier;
     }
 
     @Override
     public void actOn(Battle battle) {
+        currentDamage *= damageModifier;
         Character target = battle.getTarget();
         target.takeDamage(currentDamage);
+        currentDamage = 1;
     }
 
     

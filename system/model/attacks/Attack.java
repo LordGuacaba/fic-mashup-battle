@@ -18,4 +18,18 @@ public class Attack {
     public void addAction(AttackAction action) {
         this.actions.add(action);
     }
+
+    public void modifyDamage(double modifier) {
+        for (AttackAction action : this.actions) {
+            if (action instanceof DamageAction) {
+                DamageAction damager = (DamageAction)action;
+                damager.modifyDamage(modifier);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name + "\n" + description;
+    }
 }

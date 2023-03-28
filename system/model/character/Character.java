@@ -1,7 +1,9 @@
 package system.model.character;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import system.model.attacks.Attack;
 import system.model.effects.StatusEffect;
@@ -21,9 +23,7 @@ public class Character {
     private final int maxHealth;
     private int currentHealth;
     private final int speed;
-    private Attack basicAttack;
-    private Attack superAttack;
-    private Attack ultimateAttack;
+    private Map<AttackType, Attack> attacks;
 
     private TurnState turnState;
     private List<StatusEffect> effects;
@@ -38,9 +38,7 @@ public class Character {
         this.currentHealth = maxHealth;
         this.attackMod = 1;
         this.defenseMod = 1;
-        this.basicAttack = null;
-        this.superAttack = null;
-        this.ultimateAttack = null;
+        this.attacks = new HashMap<>();
         this.turnState = TurnState.NOT_BATTLING;
         this.effects = new LinkedList<>();
     }
@@ -75,8 +73,33 @@ public class Character {
         }
     }
 
+    public Attack attack(AttackType type) {
+        if (turnState == TurnState.READY) {
+            turnState = TurnState.ATTACKING;
+            notifyEffects();
+            Attack attack = attacks.get(type);
+            attack.modifyDamage(attackMod * this.attack);
+            return attack;
+        } else {
+            throw new UnsupportedOperationException("Character cannot attack while not ready");
+        }
+    }
+
+    public void endTurn() {
+        if (turnState == TurnState.ATTACKING) {
+            turnState = TurnState.RESTING;
+            notifyEffects();
+            attackMod = 1;
+            defenseMod = 1;
+        }
+    }
+
+    public void addAttack(AttackType type, Attack attack) {
+        this.attacks.put(type, attack);
+    }
+
     public void takeDamage(int damage) {
-        this.currentHealth -= damage;
+        this.currentHealth -= damage*defenseMod;
         if (currentHealth <= 0) {
             currentHealth = 0;
             this.turnState = TurnState.KNOCKED_OUT;
@@ -92,7 +115,7 @@ public class Character {
 
     @Override
     public String toString() {
-        String out = name + ": " + attack + " attack power, " + speed + " speed\n";
+        String out = name + ": " + attack + " attack power, " + speed + " speed, " + currentHealth + "/" + maxHealth + "HP\n";
         if (this.effects.size() > 0) {
             StringBuilder effectString = new StringBuilder();
             for (StatusEffect effect : this.effects) {
