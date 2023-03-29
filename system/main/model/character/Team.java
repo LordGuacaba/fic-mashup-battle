@@ -1,4 +1,4 @@
-package system.model.character;
+package system.main.model.character;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

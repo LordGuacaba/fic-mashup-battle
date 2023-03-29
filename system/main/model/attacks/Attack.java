@@ -1,4 +1,4 @@
-package system.model.attacks;
+package system.main.model.attacks;
 
 import java.util.LinkedList;
 import java.util.List;

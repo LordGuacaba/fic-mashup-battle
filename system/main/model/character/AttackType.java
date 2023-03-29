@@ -1,4 +1,4 @@
-package system.model.character;
+package system.main.model.character;
 
 public enum AttackType {
     BASIC,

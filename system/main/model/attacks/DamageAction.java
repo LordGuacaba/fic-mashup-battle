@@ -1,7 +1,7 @@
-package system.model.attacks;
+package system.main.model.attacks;
 
-import system.model.character.Battle;
-import system.model.character.Character;
+import system.main.model.character.Battle;
+import system.main.model.character.Character;
 
 /**
  * An abstract action that does damage to an opposing {@link Character}. The exact damage

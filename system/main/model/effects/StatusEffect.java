@@ -1,6 +1,6 @@
-package system.model.effects;
+package system.main.model.effects;
 
-import system.model.character.Character;
+import system.main.model.character.Character;
 
 /**
  * Represents a status effect on a {@link Character} during a battle.

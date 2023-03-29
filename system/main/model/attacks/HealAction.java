@@ -1,6 +1,6 @@
-package system.model.attacks;
+package system.main.model.attacks;
 
-import system.model.character.Battle;
+import system.main.model.character.Battle;
 
 public class HealAction implements AttackAction {
 

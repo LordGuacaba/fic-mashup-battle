@@ -1,9 +1,9 @@
-package system.model.attacks;
+package system.main.model.attacks;
 
 import java.util.List;
 
-import system.model.character.Battle;
-import system.model.character.Character;
+import system.main.model.character.Battle;
+import system.main.model.character.Character;
 
 /**
  * Represents a damaging effect of an attack that affects targets and their

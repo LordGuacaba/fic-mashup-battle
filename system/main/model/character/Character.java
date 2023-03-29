@@ -1,12 +1,12 @@
-package system.model.character;
+package system.main.model.character;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import system.model.attacks.Attack;
-import system.model.effects.StatusEffect;
+import system.main.model.attacks.Attack;
+import system.main.model.effects.StatusEffect;
 /**
  * Represents a character in the fiction mashup battle. May battle other characters.
  * 
