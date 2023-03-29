@@ -19,6 +19,10 @@ public class Attack {
         this.actions.add(action);
     }
 
+    public List<AttackAction> getActions() {
+        return actions;
+    }
+
     public void modifyDamage(double modifier) {
         for (AttackAction action : this.actions) {
             if (action instanceof DamageAction) {

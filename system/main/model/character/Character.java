@@ -51,6 +51,14 @@ public class Character {
         }
     }
 
+    public String getName() {
+        return this.name;
+    }
+    
+    public List<String> getAffiliations() {
+        return this.affiliations;
+    }
+
     public int getSpeed() {
         return this.speed;
     }

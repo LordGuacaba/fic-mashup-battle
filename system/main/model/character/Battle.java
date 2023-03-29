@@ -5,6 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
+import system.main.model.attacks.Attack;
+import system.main.model.attacks.AttackAction;
+
 public class Battle {
     
     private Team attackers;
@@ -58,5 +61,19 @@ public class Battle {
             attackers = temp;
         }
         active.startTurn();
+    }
+
+    public void takeTurn(AttackType type) {
+        Attack attack = active.attack(type);
+        for (AttackAction action : attack.getActions()) {
+            action.actOn(this);
+        }
+        for (Character defender : defenders.getActive()) {
+            if (defender != null && defender.turnState() == TurnState.KNOCKED_OUT) {
+                turnOrder.remove(defender);
+                defenders.knockOut(defender);
+            }
+        }
+        active.endTurn();
     }
 }

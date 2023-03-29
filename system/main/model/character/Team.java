@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class Team {
     
-    private String teamName;
+    private final String teamName;
     private List<Character> active;
     private final Queue<Character> knockedOut;
 
@@ -70,5 +70,25 @@ public class Team {
             active.remove(character);
             knockedOut.add(character);
         }
+    }
+
+    public boolean defeated() {
+        return this.knockedOut.size() == 5;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(teamName + "\n");
+        for (Character character : this.active) {
+            if (character == null) {
+                builder.append("      ");
+            } else {
+                builder.append(character);
+            }
+            builder.append(" | ");
+        }
+        builder.append("\b\b\b");
+        return builder.toString();
     }
 }
