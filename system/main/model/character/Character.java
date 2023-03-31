@@ -27,6 +27,8 @@ public class Character {
 
     private TurnState turnState;
     private List<StatusEffect> effects;
+    private List<CharacterObserver> observers;
+
 /**
  * Creates a character with its name, affiliations, and basic stats.
  * 
@@ -49,6 +51,7 @@ public class Character {
         this.attacks = new HashMap<>();
         this.turnState = TurnState.NOT_BATTLING;
         this.effects = new LinkedList<>();
+        this.observers = new LinkedList<>();
     }
 
     /**
@@ -62,6 +65,16 @@ public class Character {
                 this.effects.remove(effect);
             }
         }
+    }
+
+    private void notifyObservers() {
+        for (CharacterObserver observer : this.observers) {
+            observer.notifyObserver(this);
+        }
+    }
+
+    public void register(CharacterObserver observer) {
+        this.observers.add(observer);
     }
 
     /**
@@ -184,6 +197,7 @@ public class Character {
         if (currentHealth <= 0) {
             currentHealth = 0;
             this.turnState = TurnState.KNOCKED_OUT;
+            this.notifyObservers();
         }
     }
 

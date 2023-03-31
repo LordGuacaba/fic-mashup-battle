@@ -7,11 +7,23 @@ public class Attack {
     
     private final String name;
     private final String description;
+    private final int energy;
+    private int currentEnergy;
     private List<AttackAction> actions;
 
-    public Attack(String name, String description) {
+    public Attack(String name, String description, int energy, int startingEnergy) {
         this.name = name;
         this.description = description;
+        this.energy = energy;
+        this.currentEnergy = startingEnergy;
+        this.actions = new LinkedList<>();
+    }
+
+    public Attack(String name, String description, int energy) {
+        this.name = name;
+        this.description = description;
+        this.energy = energy;
+        this.currentEnergy = energy;
         this.actions = new LinkedList<>();
     }
 
@@ -21,6 +33,10 @@ public class Attack {
 
     public List<AttackAction> getActions() {
         return actions;
+    }
+
+    public boolean isReady() {
+        return currentEnergy == energy;
     }
 
     public void modifyDamage(double modifier) {
@@ -34,6 +50,6 @@ public class Attack {
 
     @Override
     public String toString() {
-        return name + "\n" + description;
+        return name + " | " + currentEnergy + "/" + energy + "\n" + description;
     }
 }
