@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Represents a team of 5 characters that may battle another team
+ * Represents a team of 5 characters that may battle another team.
  * 
  * @author Will Hoover
  */
-public class Team {
+public class Team implements CharacterObserver {
     
     private final String teamName;
     private List<Character> active;
@@ -65,7 +65,7 @@ public class Team {
         }
     }
 
-    public void knockOut(Character character) {
+    private void knockOut(Character character) {
         if (active.contains(character) && character.turnState() == TurnState.KNOCKED_OUT) {
             active.remove(character);
             knockedOut.add(character);
@@ -74,6 +74,13 @@ public class Team {
 
     public boolean defeated() {
         return this.knockedOut.size() == 5;
+    }
+
+    @Override
+    public void notifyObserver(Character character) {
+        if (character.turnState() == TurnState.KNOCKED_OUT) {
+            knockOut(character);
+        }
     }
 
     @Override
@@ -91,4 +98,5 @@ public class Team {
         builder.append("\b\b\b");
         return builder.toString();
     }
+
 }

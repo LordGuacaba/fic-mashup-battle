@@ -8,7 +8,7 @@ import java.util.Queue;
 import system.main.model.attacks.Attack;
 import system.main.model.attacks.AttackAction;
 
-public class Battle {
+public class Battle implements CharacterObserver {
     
     private Team attackers;
     private Team defenders;
@@ -68,12 +68,13 @@ public class Battle {
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }
-        for (Character defender : defenders.getActive()) {
-            if (defender != null && defender.turnState() == TurnState.KNOCKED_OUT) {
-                turnOrder.remove(defender);
-                defenders.knockOut(defender);
-            }
-        }
         active.endTurn();
+    }
+
+    @Override
+    public void notifyObserver(Character character) {
+        if (character.turnState() == TurnState.KNOCKED_OUT) {
+            turnOrder.remove(character);
+        }
     }
 }
