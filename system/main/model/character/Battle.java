@@ -5,8 +5,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
+import system.main.controller.MessageLogger;
 import system.main.model.attacks.Attack;
 import system.main.model.attacks.AttackAction;
+import system.main.model.exceptions.FMBException;
 
 public class Battle implements CharacterObserver {
     
@@ -64,7 +66,13 @@ public class Battle implements CharacterObserver {
     }
 
     public void takeTurn(AttackType type) {
-        Attack attack = active.attack(type);
+        Attack attack;
+        try {
+            attack = active.attack(type);
+        } catch (FMBException e) {
+            MessageLogger.getInstance().logMessage(e.getMessage());
+            return;
+        }
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }

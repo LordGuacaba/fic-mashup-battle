@@ -7,6 +7,7 @@ import java.util.Map;
 
 import system.main.model.attacks.Attack;
 import system.main.model.effects.StatusEffect;
+import system.main.model.exceptions.FMBException;
 /**
  * Represents a character in the fiction mashup battle. May battle other characters.
  * 
@@ -151,15 +152,18 @@ public class Character {
      * @param type The type of attack being performed
      * @return The attack to perform with all necessary modifications
      */
-    public Attack attack(AttackType type) {
-        if (turnState == TurnState.READY) {
+    public Attack attack(AttackType type) throws FMBException {
+        Attack attack = attacks.get(type);
+        if (!attack.isReady()) {
+            throw new FMBException("Attack does not have sufficient energy");
+        }
+        else if (turnState == TurnState.READY) {
             turnState = TurnState.ATTACKING;
             notifyEffects();
-            Attack attack = attacks.get(type);
             attack.modifyDamage(attackMod * this.attack);
             return attack;
         } else {
-            throw new UnsupportedOperationException("Character cannot attack while not ready");
+            throw new FMBException(name + " is not ready to attack");
         }
     }
 
