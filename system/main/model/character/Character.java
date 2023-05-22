@@ -16,7 +16,7 @@ import system.main.model.exceptions.FMBException;
 public class Character {
     
     private final String name;
-    private List<String> affiliations;
+    private String[] affiliations;
     private String description;
 
     private final int attack;
@@ -41,7 +41,7 @@ public class Character {
  * @param maxHealth The maximum health of the character - character starts at this health.
  * @param speed The character's speed - determines turn order in a battle.
  */
-    public Character(String name, List<String> affiliations, String description, int attack, int maxHealth, int speed) {
+    public Character(String name, String[] affiliations, String description, int attack, int maxHealth, int speed) {
         this.name = name;
         this.affiliations = affiliations;
         this.description = description;
@@ -95,7 +95,7 @@ public class Character {
      * 
      * @return The character's affiliations.
      */
-    public List<String> getAffiliations() {
+    public String[] getAffiliations() {
         return this.affiliations;
     }
 
