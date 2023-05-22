@@ -17,6 +17,7 @@ public class Character {
     
     private final String name;
     private List<String> affiliations;
+    private String description;
 
     private final int attack;
     private double attackMod;
@@ -35,13 +36,15 @@ public class Character {
  * 
  * @param name The name of the character.
  * @param affiliations The affiliations of the character.
+ * @param description A description of the character.
  * @param attack The character's attack power - applied to every attack.
  * @param maxHealth The maximum health of the character - character starts at this health.
  * @param speed The character's speed - determines turn order in a battle.
  */
-    public Character(String name, List<String> affiliations, int attack, int maxHealth, int speed) {
+    public Character(String name, List<String> affiliations, String description, int attack, int maxHealth, int speed) {
         this.name = name;
         this.affiliations = affiliations;
+        this.description = description;
         this.attack = attack;
         this.maxHealth = maxHealth;
         this.speed = speed;
@@ -94,6 +97,15 @@ public class Character {
      */
     public List<String> getAffiliations() {
         return this.affiliations;
+    }
+
+    /**
+     * Returns the character's description.
+     * 
+     * @return The character's description.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -221,6 +233,7 @@ public class Character {
     @Override
     public String toString() {
         String out = name + ": " + attack + " attack power, " + speed + " speed, " + currentHealth + "/" + maxHealth + "HP\n";
+        out += description + "\n";
         if (this.effects.size() > 0) {
             StringBuilder effectString = new StringBuilder();
             for (StatusEffect effect : this.effects) {

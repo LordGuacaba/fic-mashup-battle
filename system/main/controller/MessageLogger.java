@@ -8,7 +8,7 @@ import system.main.view.UserInterface;
  */
 public class MessageLogger {
     
-    private static MessageLogger INSTANCE;
+    private static MessageLogger instance;
     private UserInterface ui;
 
     private MessageLogger() {
@@ -16,11 +16,11 @@ public class MessageLogger {
     }
 
     public static MessageLogger getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new MessageLogger();
+        if (instance == null) {
+            instance = new MessageLogger();
         }
         
-        return INSTANCE;
+        return instance;
     }
 
     public void setUI(UserInterface ui) {
