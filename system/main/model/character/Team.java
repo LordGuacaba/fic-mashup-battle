@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class Team implements CharacterObserver {
     
-    private final String teamName;
+    private String teamName;
     private List<Character> active;
     private final Queue<Character> knockedOut;
 
@@ -25,6 +25,10 @@ public class Team implements CharacterObserver {
 
     public List<Character> getActive() {
         return this.active;
+    }
+
+    public void setTeamName(String name) {
+        this.teamName = name;
     }
 
     public List<Character> getAdjacent(Character character) {

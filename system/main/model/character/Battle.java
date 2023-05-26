@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
-import system.main.controller.MessageLogger;
 import system.main.model.attacks.Attack;
 import system.main.model.attacks.AttackAction;
 import system.main.model.exceptions.FMBException;
@@ -54,6 +53,12 @@ public class Battle implements CharacterObserver {
         return this.active;
     }
 
+    public void setTarget(Character character) {
+        if (defenders.isOnTeam(character)) {
+            this.target = character;
+        }
+    }
+
     public void startTurn() {
         turnOrder.add(active);
         active = turnOrder.poll();
@@ -61,18 +66,13 @@ public class Battle implements CharacterObserver {
             Team temp = defenders;
             defenders = attackers;
             attackers = temp;
+            target = attackers.getActive().get(0);
         }
         active.startTurn();
     }
 
-    public void takeTurn(AttackType type) {
-        Attack attack;
-        try {
-            attack = active.attack(type);
-        } catch (FMBException e) {
-            MessageLogger.getInstance().logMessage(e.getMessage());
-            return;
-        }
+    public void takeTurn(AttackType type) throws FMBException {
+        Attack attack = active.attack(type);
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }
