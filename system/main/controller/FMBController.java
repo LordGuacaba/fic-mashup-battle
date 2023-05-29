@@ -30,6 +30,8 @@ public class FMBController {
         db = new CSVCharacterDatabase();
         battleSession = null;
         this.ui = ui;
+        team1 = new Team("Team 1");
+        team2 = new Team("Team 2");
     }
 
     /**
@@ -38,24 +40,54 @@ public class FMBController {
      * @param isMultiplayer True if this is a two player battle, false if it's one player vs the computer.
      */
     public void initiateBattle(boolean isMultiplayer) {
-        team1 = new Team("Team 1");
-        team2 = new Team("Team 2");
         battleSession = new BattleSession(isMultiplayer, team1, team2, ui);
         ui.putMessage("Please fill out the battle teams!");
     }
 
+    /**
+     * Displays and returns team 1.
+     * 
+     * @return the current state of team 1.
+     */
     public Team viewTeam1() {
+        ui.displayTeam(team1);
         return team1;
     }
- 
+
     /**
-     * Adds a character to team 1 if not full.
+     * Displays and returns team 2.
+     * 
+     * @return the current state of team 2.
+     */
+    public Team viewTeam2() {
+        ui.displayTeam(team2);
+        return team2;
+    }
+
+    /**
+     * Adds a character to the specified team (should be team 1 or team 2) if not full.
      * 
      * @param character The character to be added.
      */
-    public void addToTeam1(Character character) {
-        if (!team1.addCharacter(character)) {
-            ui.putMessage(team1.getTeamName() + " is full!");
+    public void addToTeam(Team team, Character character) {
+        if (!team.addCharacter(character)) {
+            ui.putMessage(team.getTeamName() + " is full!");
+        } else {
+            ui.displayTeam(team);
+        }
+    }
+
+    /**
+     * Removes the specified character from the team.
+     * 
+     * @param team The team to remove the character from.
+     * @param character The character to remove from the team.
+     */
+    public void removeFromTeam(Team team, Character character) {
+        if (!team.removeCharacter(character)) {
+            ui.putMessage(team.getTeamName() + " is empty!");
+        } else {
+            ui.displayTeam(team);
         }
     }
 
