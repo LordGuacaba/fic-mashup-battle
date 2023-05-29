@@ -111,5 +111,13 @@ public class BattleSession {
         runTeamAI();
         return true;
     }
+
+    public Character getActiveCharacter() {
+        if (battle != null) {
+            return battle.getActive();
+        } else {
+            return null;
+        }
+    }
     
 }

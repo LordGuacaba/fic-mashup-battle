@@ -44,6 +44,22 @@ public class FMBController {
         ui.putMessage("Please fill out the battle teams!");
     }
 
+    public Team viewTeam1() {
+        return team1;
+    }
+ 
+    /**
+     * Adds a character to team 1 if not full.
+     * 
+     * @param character The character to be added.
+     */
+    public void addToTeam1(Character character) {
+        if (!team1.addCharacter(character)) {
+            ui.putMessage(team1.getTeamName() + " is full!");
+        }
+    }
+
+
     /**
      * Searches the database for characters matching the search specification and displays and returns
      * them to the UI.
@@ -56,6 +72,15 @@ public class FMBController {
         List<Character> results = db.searchDatabase(searcher, searchString);
         ui.displayCharacters(results);
         return results;
+    }
+
+    /**
+     * Tells the UI to display the given character.
+     * 
+     * @param character The character to be displayed.
+     */
+    public void viewCharacter(Character character) {
+        ui.displayCharacter(character);
     }
 
     /**
@@ -72,6 +97,21 @@ public class FMBController {
      */
     public void launchAttack(AttackType type) {
         battleSession.playerAttack(type);
+    }
+
+    /**
+     * If a battle is in progress, the active character is displayed to the user.
+     */
+    public void viewActiveCharacter() {
+        if (battleSession == null) {
+            ui.putMessage("No battle has been initiated.");
+        }
+        Character active = battleSession.getActiveCharacter();
+        if (active == null) {
+            ui.putMessage("No battle in progress.");
+        } else {
+            ui.displayCharacter(active);
+        }
     }
 
 

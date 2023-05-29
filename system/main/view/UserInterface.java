@@ -4,6 +4,7 @@ import java.util.List;
 
 import system.main.model.character.Battle;
 import system.main.model.character.Character;
+import system.main.model.character.Team;
 
 /**
  * Implemented by any class that directly acts as a user interface so a class may interact with it
@@ -28,9 +29,23 @@ public interface UserInterface {
     void displayBattle(Battle battle);
 
     /**
+     * Displays the given team to the user.
+     * 
+     * @param team The team to be displayed.
+     */
+    void displayTeam(Team team);
+
+    /**
      * Displays a list of {@link Character}s in the UI's format.
      * 
      * @param characters The characters to be displayed.
      */
     void displayCharacters(List<Character> characters);
+
+    /**
+     * Displays a {@link Character} and its attacks in the UI format.
+     * 
+     * @param character The character to be displayed with full details.
+     */
+    void displayCharacter(Character character);
 }

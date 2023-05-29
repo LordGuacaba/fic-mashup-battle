@@ -77,6 +77,15 @@ public class Team implements CharacterObserver {
         }
     }
 
+    public boolean removeCharacter(Character character) {
+        if (active.size() == 0) {
+            return false;
+        } else {
+            active.remove(character);
+            return true;
+        }
+    }
+
     private void knockOut(Character character) {
         if (active.contains(character) && character.turnState() == TurnState.KNOCKED_OUT) {
             active.remove(character);
