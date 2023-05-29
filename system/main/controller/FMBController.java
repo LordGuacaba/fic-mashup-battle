@@ -1,10 +1,14 @@
 package system.main.controller;
 
+import java.util.List;
+
 import system.main.model.character.AttackType;
 import system.main.model.character.Team;
 import system.main.model.database.CSVCharacterDatabase;
 import system.main.model.database.CharacterDatabase;
+import system.main.model.searching.Searcher;
 import system.main.view.UserInterface;
+import system.main.model.character.Character;
 
 /**
  * Allows an FMB client to interact with the system through a set of allowed user operations.
@@ -40,11 +44,16 @@ public class FMBController {
         ui.putMessage("Please fill out the battle teams!");
     }
 
+    public List<Character> searchDatabase(Searcher searcher, String searchString) {
+        List<Character> results = db.searchDatabase(searcher, searchString);
+        return results;
+    }
+
     /**
      * Starts the battle between the two teams.
      */
     public void startBattle() {
-
+        battleSession.startBattle();
     }
 
     public void launchAttack(AttackType type) {

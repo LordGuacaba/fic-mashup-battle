@@ -16,6 +16,7 @@ public class Battle implements CharacterObserver {
     private Queue<Character> turnOrder;
     private Character active;
     private Character target;
+    private boolean isOver;
 
     public Battle(Team team1, Team team2) {
         attackers = team1;
@@ -36,7 +37,8 @@ public class Battle implements CharacterObserver {
         for (Character character : initialList) {
             turnOrder.add(character);
         }
-        startTurn();
+        isOver = false;
+        try {startTurn();} catch (FMBException e) {}
     }
 
     public Team getAttackers() {
@@ -55,13 +57,20 @@ public class Battle implements CharacterObserver {
         return this.active;
     }
 
+    public boolean isOver() {
+        return isOver;
+    }
+
     public void setTarget(Character character) {
         if (defenders.isOnTeam(character)) {
             this.target = character;
         }
     }
 
-    public void startTurn() {
+    public void startTurn() throws FMBException {
+        if (isOver) {
+            throw new FMBException("Battle is over!");
+        }
         turnOrder.add(active);
         active = turnOrder.poll();
         if (defenders.isOnTeam(active)) {
@@ -79,6 +88,9 @@ public class Battle implements CharacterObserver {
             action.actOn(this);
         }
         active.endTurn();
+        if (defenders.size() == 0) {
+            isOver = true;
+        }
     }
 
     @Override

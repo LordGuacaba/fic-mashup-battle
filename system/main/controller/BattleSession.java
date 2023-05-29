@@ -55,7 +55,12 @@ public class BattleSession {
                         }
                     }
                 }
-                battle.startTurn();
+                try {
+                    battle.startTurn();
+                } catch (FMBException e) {
+                    ui.putMessage("The battle is over, " + battle.getAttackers().getTeamName() + " wins!");
+                    battle = null;
+                }
             }
         }
     }
@@ -96,28 +101,14 @@ public class BattleSession {
             return false;
         }
         ui.displayBattle(battle);
-        battle.startTurn();
-        if (!isMultiplayer) {
-            Random random = new Random();
-            while (team1 == battle.getDefenders()) {
-                int position = random.nextInt(team1.size());
-                battle.setTarget(team1.getActive().get(position));
-                try {
-                    battle.takeTurn(AttackType.ULTIMATE);
-                } catch (FMBException e) {
-                    try {
-                        battle.takeTurn(AttackType.SUPER);
-                    } catch (FMBException e2) {
-                        try {
-                            battle.takeTurn(AttackType.BASIC);
-                        } catch (FMBException e3) {
-                            ui.putMessage("Issue with computer attack: " + e3.getMessage());
-                        }
-                    }
-                }
-                battle.startTurn();
-            }
+        try {
+            battle.startTurn();
+        } catch (FMBException e) {
+            ui.putMessage("The battle is over, " + battle.getAttackers().getTeamName() + " wins!");
+            battle = null;
+            return true;
         }
+        runTeamAI();
         return true;
     }
     
