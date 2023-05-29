@@ -53,5 +53,15 @@ public class FMBCLI implements UserInterface {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayCharacter'");
     }
+
+    private void runUI() {
+        putMessage("Welcome to Fiction-Mashup Battle, a game in which all of your favorite fictional\n"
+            + "(and made up) characters go against each other in battle!");
+    }
+
+    public static void main(String[] args) {
+        FMBCLI ui = new FMBCLI();
+        ui.runUI();
+    }
     
 }

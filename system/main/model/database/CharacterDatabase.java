@@ -2,6 +2,7 @@ package system.main.model.database;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import system.main.model.character.Character;
 import system.main.model.searching.Searcher;
@@ -15,6 +16,7 @@ public abstract class CharacterDatabase {
     private List<Character> characters;
 
     public CharacterDatabase() {
+        characters = new LinkedList<>();
         try {
             load();
         } catch (IOException e) {

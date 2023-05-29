@@ -13,13 +13,11 @@ import system.main.model.character.Character;
 
 public class CSVCharacterDatabase extends CharacterDatabase {
 
-    private String characterFile;
-    private String attackFile;
+    private final String characterFile = "data/characters.csv";
+    private final String attackFile = "data/attacks.csv";
 
     public CSVCharacterDatabase() {
         super();
-        characterFile = "data/characters.csv";
-        attackFile = "data/attacks.csv";
     }
 
     private Character readCharacter(String line) {
@@ -67,6 +65,7 @@ public class CSVCharacterDatabase extends CharacterDatabase {
                 next.addAttack(order[i], newAttack);
             }
             addCharacter(next);
+            line = charReader.readLine();
         }
         charReader.close();
         attackReader.close();
