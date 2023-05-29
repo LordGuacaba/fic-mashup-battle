@@ -151,6 +151,9 @@ public class Character {
     public void startTurn() {
         if (turnState == TurnState.RESTING) {
             turnState = TurnState.READY;
+            for (AttackType type : attacks.keySet()) {
+                attacks.get(type).gainEnergy();
+            }
             notifyEffects();
         } else {
             throw new UnsupportedOperationException("Character unable to start turn");

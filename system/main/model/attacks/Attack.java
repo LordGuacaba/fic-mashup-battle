@@ -3,6 +3,8 @@ package system.main.model.attacks;
 import java.util.LinkedList;
 import java.util.List;
 
+import system.main.model.exceptions.FMBException;
+
 public class Attack {
     
     private final String name;
@@ -31,12 +33,25 @@ public class Attack {
         this.actions.add(action);
     }
 
-    public List<AttackAction> getActions() {
+    public List<AttackAction> getActions() throws FMBException {
+        if (!isReady()) {
+            throw new FMBException("Attack does not have sufficient energy.");
+        }
         return actions;
     }
 
     public boolean isReady() {
         return currentEnergy == energy;
+    }
+
+    public void gainEnergy() {
+        if (currentEnergy < energy) {
+            currentEnergy++;
+        }
+    }
+
+    public void deplete() {
+        currentEnergy = 0;
     }
 
     public void modifyDamage(double modifier) {

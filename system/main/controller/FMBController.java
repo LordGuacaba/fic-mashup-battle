@@ -44,8 +44,17 @@ public class FMBController {
         ui.putMessage("Please fill out the battle teams!");
     }
 
+    /**
+     * Searches the database for characters matching the search specification and displays and returns
+     * them to the UI.
+     * 
+     * @param searcher The searcher to be used.
+     * @param searchString The search string to match against.
+     * @return A list of characters that match the search parameters.
+     */
     public List<Character> searchDatabase(Searcher searcher, String searchString) {
         List<Character> results = db.searchDatabase(searcher, searchString);
+        ui.displayCharacters(results);
         return results;
     }
 
@@ -56,6 +65,11 @@ public class FMBController {
         battleSession.startBattle();
     }
 
+    /**
+     * Launches an attack in the battle of the specified type.
+     * 
+     * @param type The type of attack to be launched.
+     */
     public void launchAttack(AttackType type) {
         battleSession.playerAttack(type);
     }

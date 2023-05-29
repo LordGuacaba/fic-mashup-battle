@@ -87,6 +87,7 @@ public class Battle implements CharacterObserver {
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }
+        attack.deplete();
         active.endTurn();
         if (defenders.size() == 0) {
             isOver = true;
