@@ -1,7 +1,9 @@
 package system.main.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import system.main.controller.FMBController;
 import system.main.model.character.Battle;
 import system.main.model.character.Character;
 import system.main.model.character.Team;
@@ -12,6 +14,16 @@ import system.main.model.character.Team;
  * @author Will Hoover
  */
 public class FMBCLI implements UserInterface {
+
+    private Team lastTeam;
+    private List<Character> lastList;
+    private FMBController controller;
+
+    public FMBCLI() {
+        controller = new FMBController(this);
+        lastList = new ArrayList<>();
+        lastTeam = null;
+    }
 
     @Override
     public void putMessage(String message) {

@@ -128,7 +128,11 @@ public class FMBController {
      * @param type The type of attack to be launched.
      */
     public void launchAttack(AttackType type) {
-        battleSession.playerAttack(type);
+        if (battleSession == null) {
+            ui.putMessage("No battle has been initiated!");
+        } else {
+            battleSession.playerAttack(type);
+        }
     }
 
     /**
@@ -144,6 +148,11 @@ public class FMBController {
         } else {
             ui.displayCharacter(active);
         }
+    }
+
+    public void exitBattle() {
+        battleSession = null;
+        ui.putMessage("The battle has been ended.");
     }
 
 
