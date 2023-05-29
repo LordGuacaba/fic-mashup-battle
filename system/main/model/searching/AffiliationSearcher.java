@@ -6,22 +6,22 @@ import java.util.List;
 import system.main.model.character.Character;
 
 /**
- * A {@link Searcher} implementation that searches for characters based on their name.
+ * A {@link Searcher} implementation that searches for characters based on their affiliations.
  * 
  * @author Will Hoover
  */
-public class NameSearcher implements Searcher {
+public class AffiliationSearcher implements Searcher {
 
-    public NameSearcher() {
-
-    }
+    public AffiliationSearcher() {}
 
     @Override
     public List<Character> searchForCharacters(List<Character> toSearch, String searchString) {
         List<Character> results = new LinkedList<>();
         for (Character character : toSearch) {
-            if (character.getName().contains(searchString)) {
-                results.add(character);
+            for (String affiliation : character.getAffiliations()) {
+                if (affiliation.contains(searchString)) {
+                    results.add(character);
+                }
             }
         }
         return results;

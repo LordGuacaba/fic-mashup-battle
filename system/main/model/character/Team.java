@@ -27,6 +27,14 @@ public class Team implements CharacterObserver {
         return this.active;
     }
 
+    public int size() {
+        return this.active.size();
+    }
+
+    public String getTeamName() {
+        return this.teamName;
+    }
+
     public void setTeamName(String name) {
         this.teamName = name;
     }

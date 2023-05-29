@@ -18,6 +18,8 @@ public class Battle implements CharacterObserver {
     private Character target;
 
     public Battle(Team team1, Team team2) {
+        attackers = team1;
+        defenders = team2;
         List<Character> initialList = team1.getActive();
         for (Character character : team2.getActive()) {
             initialList.add(character);

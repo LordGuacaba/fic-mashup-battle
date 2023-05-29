@@ -34,7 +34,10 @@ public class FMBController {
      * @param isMultiplayer True if this is a two player battle, false if it's one player vs the computer.
      */
     public void initiateBattle(boolean isMultiplayer) {
+        team1 = new Team("Team 1");
+        team2 = new Team("Team 2");
         battleSession = new BattleSession(isMultiplayer, team1, team2, ui);
+        ui.putMessage("Please fill out the battle teams!");
     }
 
     /**
