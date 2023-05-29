@@ -235,7 +235,7 @@ public class Character {
 
     @Override
     public String toString() {
-        String out = name + ": " + attack + " attack power, " + speed + " speed, " + currentHealth + "/" + maxHealth + "HP\n";
+        String out = name + ": " + attack + " attack power, " + speed + " speed, " + currentHealth + "/" + maxHealth + " HP\n";
         out += description + "\n";
         if (this.effects.size() > 0) {
             StringBuilder effectString = new StringBuilder();
