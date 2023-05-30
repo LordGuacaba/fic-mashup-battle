@@ -73,6 +73,7 @@ public class FMBController {
         if (!team.addCharacter(character)) {
             ui.putMessage(team.getTeamName() + " is full!");
         } else {
+            character.joinTeam();
             ui.displayTeam(team);
         }
     }

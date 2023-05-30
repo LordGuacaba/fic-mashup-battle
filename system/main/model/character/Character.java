@@ -1,5 +1,6 @@
 package system.main.model.character;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -137,11 +138,29 @@ public class Character {
     }
 
     /**
+     * Returns a list of the character's attacks.
+     * 
+     * @return The character's attacks.
+     */
+    public List<Attack> getAttacks() {
+        List<Attack> attackList = new ArrayList<>();
+        for (AttackType type : attacks.keySet()) {
+            attackList.add(attacks.get(type));
+        }
+        return attackList;
+    }
+
+    /**
      * Called when the character is added to a team. The turn state is set to resting to 
      * allow them to participate in battle.
      */
-    public void addToTeam() {
+    public void joinTeam() {
         this.turnState = TurnState.RESTING;
+    }
+
+    public void leaveTeam() {
+        this.turnState = TurnState.NOT_BATTLING;
+        currentHealth = maxHealth;
     }
 
     /**

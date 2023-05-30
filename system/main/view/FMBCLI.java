@@ -40,7 +40,7 @@ public class FMBCLI implements UserInterface {
 
     public FMBCLI() {
         controller = new FMBController(this);
-        lastList = new ArrayList<>();
+        lastList = null;
         lastTeam = null;
     }
 
@@ -101,7 +101,7 @@ public class FMBCLI implements UserInterface {
                         putMessage("Search for characters first!");
                     } else {
                         try {
-                            int index = Integer.parseInt(args[1]);
+                            int index = Integer.parseInt(args[1])-1;
                             controller.viewCharacter(lastList.get(index));
                         } catch (NumberFormatException e) {
                             putMessage("Second argument for \"view\" must be a number");
@@ -109,6 +109,7 @@ public class FMBCLI implements UserInterface {
                             putMessage("Your result number exceeds the previous results list");
                         }
                     }
+                    break;
 
                 case "quit":
                     putMessage("Bye bye now!");
