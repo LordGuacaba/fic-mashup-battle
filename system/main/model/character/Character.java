@@ -144,7 +144,8 @@ public class Character {
      */
     public List<Attack> getAttacks() {
         List<Attack> attackList = new ArrayList<>();
-        for (AttackType type : attacks.keySet()) {
+        AttackType[] types = {AttackType.BASIC, AttackType.SUPER, AttackType.ULTIMATE};
+        for (AttackType type : types) {
             attackList.add(attacks.get(type));
         }
         return attackList;

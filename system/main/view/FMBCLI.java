@@ -71,7 +71,9 @@ public class FMBCLI implements UserInterface {
     @Override
     public void displayCharacter(Character character) {
         System.out.println(character);
-        
+        for (Attack attack : character.getAttacks()) {
+            System.out.println(attack);
+        }
     }
 
     private void runUI() {

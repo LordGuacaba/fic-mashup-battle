@@ -151,6 +151,10 @@ public class FMBController {
         }
     }
 
+    public void setAttackTarget(Character character) {
+        battleSession.setTarget(character);
+    }
+
     public void exitBattle() {
         battleSession = null;
         ui.putMessage("The battle has been ended.");

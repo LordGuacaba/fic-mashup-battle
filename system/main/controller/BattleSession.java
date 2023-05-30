@@ -112,6 +112,10 @@ public class BattleSession {
         return true;
     }
 
+    public void setTarget(Character character) {
+        battle.setTarget(character);
+    }
+
     public Character getActiveCharacter() {
         if (battle != null) {
             return battle.getActive();
