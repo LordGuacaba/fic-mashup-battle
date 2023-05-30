@@ -1,6 +1,5 @@
 package system.main.view;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,6 +101,9 @@ public class FMBCLI implements UserInterface {
                     } else if (lastList == null) {
                         putMessage("Search for characters first!");
                     } else {
+                        if (args[1].equals("active")) {
+                            controller.viewActiveCharacter();
+                        }
                         try {
                             int index = Integer.parseInt(args[1])-1;
                             controller.viewCharacter(lastList.get(index));
@@ -111,6 +113,77 @@ public class FMBCLI implements UserInterface {
                             putMessage("Your result number exceeds the previous results list");
                         }
                     }
+                    break;
+
+                case "init":
+                    if (args.length != 2) {
+                        putMessage("Init command has incorrect number of arguments.");
+                    } else {
+                        if (args[1].contains("multi")) {
+                            controller.initiateBattle(true);
+                        } else {
+                            controller.initiateBattle(false);
+                        }
+                    }
+                    break;
+
+                case "team":
+                    if (args.length != 2) {
+                        putMessage("Team command has incorrect number of arguments.");
+                    } else {
+                        if (args[1].equals("1")) {
+                            lastTeam = controller.viewTeam1();
+                        } else {
+                            lastTeam = controller.viewTeam2();
+                        }
+                    }
+                    break;
+
+                case "add":
+                    if (args.length != 2) {
+                        putMessage("Add command has incorrect number of arguments.");
+                    } else {
+                        try {
+                            int index = Integer.parseInt(args[1])-1;
+                            controller.addToTeam(lastTeam, lastList.get(index));
+                        } catch (NumberFormatException e) {
+                            putMessage("Second argument for \"add\" must be a number");
+                        } catch (IndexOutOfBoundsException e) {
+                            putMessage("Your result number exceeds the previous results list");
+                        } catch (NullPointerException e) {
+                            putMessage("Either the team or results list does not yet exist.");
+                        }
+                    }
+                    break;
+
+                case "remove":
+                    if (args.length != 2) {
+                        putMessage("Remove command has incorrect number of arguments.");
+                    } else {
+                        try {
+                            int index = Integer.parseInt(args[1])-1;
+                            controller.removeFromTeam(lastTeam, lastTeam.getActive().get(index));
+                        } catch (NumberFormatException e) {
+                            putMessage("Second argument for \"add\" must be a number");
+                        } catch (IndexOutOfBoundsException e) {
+                            putMessage("Your result number exceeds the previous results list");
+                        } catch (NullPointerException e) {
+                            putMessage("Either the team or results list does not yet exist");
+                        }
+                    }
+                    break;
+
+                case "start":
+                    controller.startBattle();
+                    break;
+
+                case "target":
+                    break;
+
+                case "attack":
+                    break;
+
+                case "end":
                     break;
 
                 case "quit":

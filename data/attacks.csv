@@ -25,7 +25,7 @@ Brambleclaw,Spring Trap,Attack primary target for 80% damage (SPROING!) then att
 Cloudtail,Pounce,Attack primary target for 100% damage,1,1,Damage-1
 Cloudtail,GBC Glue (TM),Apply slow to primary target and 2 random enemies then attack primary target for 150% damage,3,3,Damage-1.5
 Cloudtail,Der Urknall,Attack primary target for 500% damage and adjacent targets for 300% damage,8,3,Splash-5-3
-Calvin Richards,"Hey you, attack that guy!",Someone else attacks the primary target for 100% damage,1,1,Damage-1
+Calvin Richards,"Hey you - attack that guy!",Someone else attacks the primary target for 100% damage,1,1,Damage-1
 Calvin Richards,Get Really Angry,Gain offense up and attack the primary target for 150% damage,3,3,Damage-1.5
 Calvin Richards,"REINFORCEMENTS!",Restore an ally to full health,6,3,Heal-1000-1-ally
 Lord Voldemort,"Avada Kedavra!",Attack primary target for 130% damage,1,1,Damage-1.3

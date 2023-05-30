@@ -269,4 +269,9 @@ public class Character {
         return out;
     }
 
+    public String shortString() {
+        String out = name + ": " + currentHealth + "/" + maxHealth + " HP";
+        return out;
+    }
+
 }

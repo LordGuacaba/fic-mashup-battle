@@ -40,7 +40,11 @@ public class CSVCharacterDatabase extends CharacterDatabase {
                     newAttack.addAction(new SplashDamageAction(Double.parseDouble(actionFields[1]), Double.parseDouble(actionFields[2])));
                     break;
                 case 'H':
-                    newAttack.addAction(new HealAction(Integer.parseInt(actionFields[1])));
+                    boolean self = false;
+                    if(actionFields[3].equals("self")) {
+                        self = true;
+                    }
+                    newAttack.addAction(new HealAction(Integer.parseInt(actionFields[1]), Integer.parseInt(actionFields[2]), self));
                     break;
                 default:
                     newAttack.addAction(new DamageAction(Double.parseDouble(actionFields[1])));
