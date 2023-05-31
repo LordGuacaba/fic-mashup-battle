@@ -43,6 +43,7 @@ public class SplashDamageAction extends DamageAction {
         for (Character character : secondaries) {
             character.takeDamage(currentSplash);
         }
+        currentSplash = 1;
     }
     
 }
