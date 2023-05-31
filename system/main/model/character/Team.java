@@ -112,12 +112,13 @@ public class Team implements CharacterObserver {
             if (character == null) {
                 builder.append("      ");
             } else {
-                builder.append(character);
+                builder.append(character.shortString());
             }
             builder.append(" | ");
         }
-        builder.append("\b\b\b");
-        return builder.toString();
+        String out = builder.toString();
+        out += "\b\b\b";
+        return out;
     }
 
 }

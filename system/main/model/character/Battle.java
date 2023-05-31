@@ -71,7 +71,9 @@ public class Battle implements CharacterObserver {
         if (isOver) {
             throw new FMBException("Battle is over!");
         }
-        turnOrder.add(active);
+        if (active != null) {
+            turnOrder.add(active);
+        }
         active = turnOrder.poll();
         if (defenders.isOnTeam(active)) {
             Team temp = defenders;
@@ -99,5 +101,29 @@ public class Battle implements CharacterObserver {
         if (character.turnState() == TurnState.KNOCKED_OUT) {
             turnOrder.remove(character);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Attacking: " + attackers.getTeamName() + "\n");
+        for (Character attacker : attackers.getActive()) {
+            builder.append(attacker.shortString());
+            if (active == attacker) {
+                builder.append(" (active)");
+                builder.append(" | ");
+            }
+        }
+        builder.append("\n\n");
+        builder.append("Defending: " + defenders.getTeamName() + "\n");
+        for (Character defender : defenders.getActive()) {
+            builder.append(defender.shortString());
+            if (target == defender) {
+                builder.append(" (target)");
+                builder.append(" | ");
+            }
+        }
+        builder.append("\n");
+        return builder.toString();
     }
 }
