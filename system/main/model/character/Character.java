@@ -157,11 +157,15 @@ public class Character {
      */
     public void joinTeam() {
         this.turnState = TurnState.RESTING;
+        notifyObservers();
     }
 
     public void leaveTeam() {
         this.turnState = TurnState.NOT_BATTLING;
         currentHealth = maxHealth;
+        notifyObservers();
+        this.observers.clear();
+        this.effects.clear();
     }
 
     /**

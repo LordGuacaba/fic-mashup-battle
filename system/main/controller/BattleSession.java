@@ -123,5 +123,10 @@ public class BattleSession {
             return null;
         }
     }
+
+    public void endBattle() {
+        battle.end();
+        battle = null;
+    }
     
 }

@@ -73,6 +73,8 @@ public class Team implements CharacterObserver {
             return false;
         } else {
             active.add(position-1, character);
+            character.joinTeam();
+            character.register(this);
             return true;
         }
     }
@@ -82,6 +84,7 @@ public class Team implements CharacterObserver {
             return false;
         } else {
             active.remove(character);
+            character.leaveTeam();
             return true;
         }
     }
@@ -97,10 +100,18 @@ public class Team implements CharacterObserver {
         return this.knockedOut.size() == 5;
     }
 
+    public void clear() {
+        active.clear();
+        knockedOut.clear();
+    }
+
     @Override
     public void notifyObserver(Character character) {
         if (character.turnState() == TurnState.KNOCKED_OUT) {
             knockOut(character);
+        } else if (character.turnState() == TurnState.NOT_BATTLING) {
+            active.remove(character);
+            knockedOut.remove(character);
         }
     }
 

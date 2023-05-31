@@ -35,6 +35,7 @@ public class Battle implements CharacterObserver {
         });
         turnOrder = new ArrayDeque<>();
         for (Character character : initialList) {
+            character.register(this);
             turnOrder.add(character);
         }
         isOver = false;
@@ -94,6 +95,11 @@ public class Battle implements CharacterObserver {
         if (defenders.size() == 0) {
             isOver = true;
         }
+    }
+
+    public void end() {
+        attackers.clear();
+        defenders.clear();
     }
 
     @Override
