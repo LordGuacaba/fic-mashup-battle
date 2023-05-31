@@ -49,8 +49,8 @@ public class FMBController {
      * 
      * @return the current state of team 1.
      */
-    public Team viewTeam1() {
-        ui.displayTeam(team1);
+    public Team getTeam1(boolean display) {
+        if (display) ui.displayTeam(team1);
         return team1;
     }
 
@@ -59,8 +59,8 @@ public class FMBController {
      * 
      * @return the current state of team 2.
      */
-    public Team viewTeam2() {
-        ui.displayTeam(team2);
+    public Team getTeam2(boolean display) {
+        if (display) ui.displayTeam(team2);
         return team2;
     }
 

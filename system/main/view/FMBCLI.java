@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import system.main.controller.FMBController;
+import system.main.controller.MessageLogger;
 import system.main.model.attacks.Attack;
 import system.main.model.character.AttackType;
 import system.main.model.character.Battle;
@@ -76,6 +77,8 @@ public class FMBCLI implements UserInterface {
     }
 
     private void runUI() {
+        MessageLogger logger = MessageLogger.getInstance();
+        logger.setUI(this);
         putMessage("Welcome to Fiction-Mashup Battle, a game in which all of your favorite fictional\n"
             + "(and made up) characters go against each other in battle!\n");
         putMessage("Please enter a command:");
@@ -132,9 +135,9 @@ public class FMBCLI implements UserInterface {
                         putMessage("Team command has incorrect number of arguments.");
                     } else {
                         if (args[1].equals("1")) {
-                            lastTeam = controller.viewTeam1();
+                            lastTeam = controller.getTeam1(true);
                         } else {
-                            lastTeam = controller.viewTeam2();
+                            lastTeam = controller.getTeam2(true);
                         }
                     }
                     break;
@@ -173,11 +176,35 @@ public class FMBCLI implements UserInterface {
                     }
                     break;
 
+                case "rename":
+                    if (args.length != 2) {
+                        putMessage("Rename command has incorrect number of arguments");
+                    } else {
+                        try {
+                            lastTeam.setTeamName(args[1]);
+                        } catch (NullPointerException e) {
+                            putMessage("Please select a team first");
+                        }
+                    }
+                    break;
+
                 case "start":
                     controller.startBattle();
                     break;
 
                 case "target":
+                    if (args.length != 2) {
+                        putMessage("Target command has incorrect number of arguments");
+                    } else {
+                        int index = 0;
+                        try {
+                            index = Integer.parseInt(args[1]);
+                        } catch (NumberFormatException e) {
+                            putMessage("The second argument must be a number");
+                        }
+                        controller.setAttackTarget(controller.getTeam1(false).getActive().get(index));
+                        controller.setAttackTarget(controller.getTeam2(false).getActive().get(index));
+                    }
                     break;
 
                 case "attack":

@@ -114,6 +114,7 @@ public class BattleSession {
 
     public void setTarget(Character character) {
         battle.setTarget(character);
+        ui.displayBattle(battle);
     }
 
     public Character getActiveCharacter() {
