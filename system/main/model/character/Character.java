@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import system.main.controller.MessageLogger;
 import system.main.model.attacks.Attack;
 import system.main.model.effects.StatusEffect;
 import system.main.model.exceptions.FMBException;
@@ -31,6 +32,7 @@ public class Character {
     private TurnState turnState;
     private List<StatusEffect> effects;
     private List<CharacterObserver> observers;
+    private MessageLogger logger;
 
 /**
  * Creates a character with its name, affiliations, and basic stats.
@@ -57,6 +59,7 @@ public class Character {
         this.turnState = TurnState.NOT_BATTLING;
         this.effects = new LinkedList<>();
         this.observers = new LinkedList<>();
+        this.logger = MessageLogger.getInstance();
     }
 
     /**
@@ -193,6 +196,10 @@ public class Character {
      */
     public Attack attack(AttackType type) throws FMBException {
         Attack attack = attacks.get(type);
+        if (attack == null) {
+            logger.logMessage("Please use a valid attack type");
+            return null;
+        }
         if (!attack.isReady()) {
             throw new FMBException("Attack does not have sufficient energy");
         }

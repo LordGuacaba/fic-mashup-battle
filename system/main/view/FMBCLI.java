@@ -88,7 +88,7 @@ public class FMBCLI implements UserInterface {
         while(active) {
             System.out.print(">>");
             String line = scanner.nextLine();
-            String[] args = line.split(" ");
+            String[] args = line.trim().split(" ");
             switch (args[0]) {
                 case "search":
                     if (args.length != 3) {
@@ -208,6 +208,11 @@ public class FMBCLI implements UserInterface {
                     break;
 
                 case "attack":
+                    if (args.length != 2) {
+                        putMessage("Attack command has incorrect number of arguments");
+                    } else {
+                        controller.launchAttack(TYPE_MAP.get(args[1]));
+                    }
                     break;
 
                 case "end":

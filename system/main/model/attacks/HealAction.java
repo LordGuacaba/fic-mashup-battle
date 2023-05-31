@@ -1,6 +1,7 @@
 package system.main.model.attacks;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import system.main.model.character.Battle;
@@ -20,7 +21,12 @@ public class HealAction implements AttackAction {
     
     @Override
     public void actOn(Battle battle) {
-        List<Character> toHeal = List.copyOf(battle.getAttackers().getActive());
+        List<Character> toHeal = new LinkedList<>();
+        for (Character character : battle.getAttackers().getActive()) {
+            if (character != battle.getActive()) {
+                toHeal.add(character);
+            }
+        }
         Collections.shuffle(toHeal);
         toHeal.remove(battle.getActive());
         for (int i=0; i<allies; i++) {

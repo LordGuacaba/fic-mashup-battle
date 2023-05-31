@@ -92,6 +92,9 @@ public class Battle implements CharacterObserver {
 
     public void takeTurn(AttackType type) throws FMBException {
         Attack attack = active.attack(type);
+        if (attack == null) {
+            return;
+        }
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }
