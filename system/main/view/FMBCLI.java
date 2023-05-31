@@ -198,8 +198,12 @@ public class FMBCLI implements UserInterface {
                         } catch (NumberFormatException e) {
                             putMessage("The second argument must be a number");
                         }
-                        controller.setAttackTarget(controller.getTeam1(false).getActive().get(index));
-                        controller.setAttackTarget(controller.getTeam2(false).getActive().get(index));
+                        try {
+                            controller.setAttackTarget(controller.getTeam1(false).getActive().get(index-1));
+                            controller.setAttackTarget(controller.getTeam2(false).getActive().get(index-1));
+                        } catch (IndexOutOfBoundsException e) {
+                            putMessage("That team position does not exist");
+                        }
                     }
                     break;
 

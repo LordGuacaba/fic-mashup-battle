@@ -42,6 +42,7 @@ public class Battle implements CharacterObserver {
             character.register(this);
             turnOrder.add(character);
         }
+        target = defenders.getActive().get(0);
         isOver = false;
         try {startTurn();} catch (FMBException e) {}
     }
@@ -84,7 +85,7 @@ public class Battle implements CharacterObserver {
             Team temp = defenders;
             defenders = attackers;
             attackers = temp;
-            target = attackers.getActive().get(0);
+            target = defenders.getActive().get(0);
         }
         active.startTurn();
     }
