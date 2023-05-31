@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import system.main.model.attacks.Attack;
 import system.main.model.attacks.DamageAction;
+import system.main.model.attacks.DamageAllAction;
 import system.main.model.attacks.HealAction;
 import system.main.model.attacks.SplashDamageAction;
 import system.main.model.character.AttackType;
@@ -46,6 +47,8 @@ public class CSVCharacterDatabase extends CharacterDatabase {
                     }
                     newAttack.addAction(new HealAction(Integer.parseInt(actionFields[1]), Integer.parseInt(actionFields[2]), self));
                     break;
+                case 'A':
+                    newAttack.addAction(new DamageAllAction(Integer.parseInt(actionFields[1])));
                 default:
                     newAttack.addAction(new DamageAction(Double.parseDouble(actionFields[1])));
             }
