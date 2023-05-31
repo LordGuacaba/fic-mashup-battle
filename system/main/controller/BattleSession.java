@@ -1,5 +1,6 @@
 package system.main.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -77,10 +78,13 @@ public class BattleSession {
             Searcher evilSearcher = new AffiliationSearcher();
             CharacterDatabase db = new CSVCharacterDatabase();
             List<Character> evils = db.searchDatabase(evilSearcher, "Imperial");
-            Random random = new Random();
+            Collections.shuffle(evils);
+            int counter = 0;
             while (team2.size() < 5) {
-                int position = random.nextInt(evils.size());
-                team2.addCharacter(evils.get(position));
+                if (!team2.isOnTeam(evils.get(counter))) {
+                    team2.addCharacter(evils.get(counter));
+                }
+                counter++;
             }
         }
         battle = new Battle(team1, team2);

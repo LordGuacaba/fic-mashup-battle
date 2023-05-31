@@ -2,6 +2,7 @@ package system.main.model.character;
 
 import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -21,7 +22,10 @@ public class Battle implements CharacterObserver {
     public Battle(Team team1, Team team2) {
         attackers = team1;
         defenders = team2;
-        List<Character> initialList = team1.getActive();
+        List<Character> initialList = new LinkedList<>();
+        for (Character character : team1.getActive()) {
+            initialList.add(character);
+        }
         for (Character character : team2.getActive()) {
             initialList.add(character);
         }
@@ -29,7 +33,7 @@ public class Battle implements CharacterObserver {
 
             @Override
             public int compare(Character o1, Character o2) {
-                return o1.getSpeed() - o2.getSpeed();
+                return o2.getSpeed() - o1.getSpeed();
             }
             
         });
@@ -117,8 +121,8 @@ public class Battle implements CharacterObserver {
             builder.append(attacker.shortString());
             if (active == attacker) {
                 builder.append(" (active)");
-                builder.append(" | ");
             }
+            builder.append(" | ");
         }
         builder.append("\n\n");
         builder.append("Defending: " + defenders.getTeamName() + "\n");
@@ -126,8 +130,8 @@ public class Battle implements CharacterObserver {
             builder.append(defender.shortString());
             if (target == defender) {
                 builder.append(" (target)");
-                builder.append(" | ");
             }
+            builder.append(" | ");
         }
         builder.append("\n");
         return builder.toString();
