@@ -35,16 +35,6 @@ public class FMBController {
     }
 
     /**
-     * Initiates (but does not start) a battle between two players or between one player and the computer.
-     * 
-     * @param isMultiplayer True if this is a two player battle, false if it's one player vs the computer.
-     */
-    public void initiateBattle(boolean isMultiplayer) {
-        battleSession = new BattleSession(isMultiplayer, team1, team2, ui);
-        ui.putMessage("Please fill out the battle teams!");
-    }
-
-    /**
      * Displays and returns team 1.
      * 
      * @return the current state of team 1.
@@ -73,7 +63,6 @@ public class FMBController {
         if (!team.addCharacter(character)) {
             ui.putMessage(team.getTeamName() + " is full!");
         } else {
-            character.joinTeam();
             ui.displayTeam(team);
         }
     }
@@ -119,7 +108,8 @@ public class FMBController {
     /**
      * Starts the battle between the two teams.
      */
-    public void startBattle() {
+    public void startBattle(boolean isMultiplayer) {
+        battleSession = new BattleSession(isMultiplayer, team1, team2, ui);
         battleSession.startBattle();
     }
 

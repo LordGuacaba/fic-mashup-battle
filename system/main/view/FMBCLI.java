@@ -118,14 +118,14 @@ public class FMBCLI implements UserInterface {
                     }
                     break;
 
-                case "init":
+                case "start":
                     if (args.length != 2) {
                         putMessage("Init command has incorrect number of arguments.");
                     } else {
                         if (args[1].contains("multi")) {
-                            controller.initiateBattle(true);
+                            controller.startBattle(true);
                         } else {
-                            controller.initiateBattle(false);
+                            controller.startBattle(false);
                         }
                     }
                     break;
@@ -186,10 +186,6 @@ public class FMBCLI implements UserInterface {
                             putMessage("Please select a team first");
                         }
                     }
-                    break;
-
-                case "start":
-                    controller.startBattle();
                     break;
 
                 case "target":

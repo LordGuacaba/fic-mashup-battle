@@ -64,6 +64,8 @@ public class Team implements CharacterObserver {
             return false;
         } else {
             active.add(character);
+            character.joinTeam();
+            character.register(this);
             return true;
         }
     } 
