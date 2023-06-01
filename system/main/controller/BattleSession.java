@@ -56,6 +56,7 @@ public class BattleSession {
                         }
                     }
                 }
+                ui.displayBattle(battle);
                 try {
                     battle.startTurn();
                 } catch (FMBException e) {

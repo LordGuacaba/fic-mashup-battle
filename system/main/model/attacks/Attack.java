@@ -29,6 +29,10 @@ public class Attack {
         this.actions = new LinkedList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addAction(AttackAction action) {
         this.actions.add(action);
     }

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import system.main.controller.MessageLogger;
 import system.main.model.attacks.Attack;
 import system.main.model.attacks.AttackAction;
 import system.main.model.exceptions.FMBException;
@@ -18,6 +19,7 @@ public class Battle implements CharacterObserver {
     private Character active;
     private Character target;
     private boolean isOver;
+    private MessageLogger logger;
 
     public Battle(Team team1, Team team2) {
         attackers = team1;
@@ -44,6 +46,7 @@ public class Battle implements CharacterObserver {
         }
         target = defenders.getActive().get(0);
         isOver = false;
+        logger = MessageLogger.getInstance();
         try {startTurn();} catch (FMBException e) {}
     }
 
@@ -87,6 +90,7 @@ public class Battle implements CharacterObserver {
             attackers = temp;
             target = defenders.getActive().get(0);
         }
+        logger.logMessage("It's " + active.getName() + "'s turn!");
         active.startTurn();
     }
 
@@ -98,6 +102,7 @@ public class Battle implements CharacterObserver {
         for (AttackAction action : attack.getActions()) {
             action.actOn(this);
         }
+        logger.logMessage(active.getName() + " used " + attack.getName() + " on " + target.getName());
         attack.deplete();
         active.endTurn();
         if (defenders.size() == 0) {
