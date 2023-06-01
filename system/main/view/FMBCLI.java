@@ -106,6 +106,7 @@ public class FMBCLI implements UserInterface {
                     } else {
                         if (args[1].equals("active")) {
                             controller.viewActiveCharacter();
+                            break;
                         }
                         try {
                             int index = Integer.parseInt(args[1])-1;

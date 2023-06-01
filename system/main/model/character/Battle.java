@@ -70,9 +70,12 @@ public class Battle implements CharacterObserver {
         return isOver;
     }
 
-    public void setTarget(Character character) {
+    public boolean setTarget(Character character) {
         if (defenders.isOnTeam(character)) {
             this.target = character;
+            return true;
+        } else {
+            return false;
         }
     }
 
