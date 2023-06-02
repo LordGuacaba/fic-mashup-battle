@@ -56,9 +56,9 @@ public class BattleSession {
                         }
                     }
                 }
-                ui.displayBattle(battle);
                 try {
                     battle.startTurn();
+                    ui.displayBattle(battle);
                 } catch (FMBException e) {
                     ui.putMessage("The battle is over, " + battle.getAttackers().getTeamName() + " wins!");
                     battle = null;
@@ -105,7 +105,6 @@ public class BattleSession {
             ui.putMessage(e.getMessage());
             return false;
         }
-        ui.displayBattle(battle);
         try {
             battle.startTurn();
         } catch (FMBException e) {
@@ -113,6 +112,7 @@ public class BattleSession {
             battle = null;
             return true;
         }
+        ui.displayBattle(battle);
         runTeamAI();
         return true;
     }

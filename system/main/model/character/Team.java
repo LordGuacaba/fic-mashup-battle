@@ -48,7 +48,7 @@ public class Team implements CharacterObserver {
             if (charIndex > 0) {
                 adjacent.add(active.get(charIndex-1));
             }
-            if (charIndex < active.size()) {
+            if (charIndex < active.size()-1) {
                 adjacent.add(active.get(charIndex+1));
             }
             return adjacent;

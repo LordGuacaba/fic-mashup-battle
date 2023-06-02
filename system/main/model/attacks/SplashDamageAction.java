@@ -37,9 +37,9 @@ public class SplashDamageAction extends DamageAction {
 
     @Override
     public void actOn(Battle battle) {
+        List<Character> secondaries = battle.getDefenders().getAdjacent(battle.getTarget());
         super.actOn(battle);
         currentSplash *= splashModifier;
-        List<Character> secondaries = battle.getDefenders().getAdjacent(battle.getTarget());
         for (Character character : secondaries) {
             character.takeDamage(currentSplash);
         }
