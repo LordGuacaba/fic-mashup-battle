@@ -166,6 +166,11 @@ public class Character {
     public void leaveTeam() {
         this.turnState = TurnState.NOT_BATTLING;
         currentHealth = maxHealth;
+        attackMod = 1;
+        defenseMod = 1;
+        for (Attack attack : getAttacks()) {
+            attack.reset();
+        }
         notifyObservers();
         this.observers.clear();
         this.effects.clear();

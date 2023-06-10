@@ -103,8 +103,14 @@ public class Team implements CharacterObserver {
     }
 
     public void clear() {
-        active.clear();
-        knockedOut.clear();
+        for (Character character : active) {
+            character.leaveTeam();
+            active.remove(character);
+        }
+        for (Character character : knockedOut) {
+            character.leaveTeam();
+            knockedOut.remove(character);
+        }
     }
 
     @Override

@@ -56,6 +56,9 @@ public class BattleSession {
                         }
                     }
                 }
+                if (battle.isOver()) {
+                    battle.end();
+                }
                 try {
                     battle.startTurn();
                     ui.displayBattle(battle);
@@ -104,6 +107,12 @@ public class BattleSession {
         } catch (FMBException e) {
             ui.putMessage(e.getMessage());
             return false;
+        }
+        if (battle.isOver()) {
+            battle.end();
+            ui.putMessage("The battle is over, " + battle.getAttackers().getTeamName() + " wins!");
+            battle = null;
+            return true;
         }
         try {
             battle.startTurn();

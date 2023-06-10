@@ -10,6 +10,7 @@ public class Attack {
     private final String name;
     private final String description;
     private final int energy;
+    private final int startingEnergy;
     private int currentEnergy;
     private List<AttackAction> actions;
 
@@ -17,6 +18,7 @@ public class Attack {
         this.name = name;
         this.description = description;
         this.energy = energy;
+        this.startingEnergy = startingEnergy;
         this.currentEnergy = startingEnergy;
         this.actions = new LinkedList<>();
     }
@@ -25,6 +27,7 @@ public class Attack {
         this.name = name;
         this.description = description;
         this.energy = energy;
+        this.startingEnergy = energy;
         this.currentEnergy = energy;
         this.actions = new LinkedList<>();
     }
@@ -65,6 +68,10 @@ public class Attack {
                 damager.modifyDamage(modifier);
             }
         }
+    }
+
+    public void reset() {
+        currentEnergy = startingEnergy;
     }
 
     @Override
