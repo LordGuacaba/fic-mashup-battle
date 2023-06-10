@@ -91,6 +91,10 @@ public class FMBController {
      * @return A list of characters that match the search parameters.
      */
     public List<Character> searchDatabase(Searcher searcher, String searchString) {
+        if (searcher == null) {
+            ui.putMessage("No search category specified");
+            return null;
+        }
         List<Character> results = db.searchDatabase(searcher, searchString);
         ui.displayCharacters(results);
         return results;

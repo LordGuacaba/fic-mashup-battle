@@ -183,7 +183,12 @@ public class Character {
             }
             notifyEffects();
         } else {
-            throw new UnsupportedOperationException("Character unable to start turn");
+            logger.logMessage("Issue with state: " + turnState);
+            turnState = TurnState.READY;
+            for (AttackType type : attacks.keySet()) {
+                attacks.get(type).gainEnergy();
+            }
+            notifyEffects();
         }
     }
 
