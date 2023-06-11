@@ -27,7 +27,7 @@ public class DamageAllAction extends DamageAction {
     public void actOn(Battle battle) {
         super.actOn(battle);
         currentAllDamage *= allDamage;
-        List<Character> secondaries = battle.getDefenders().getActive();
+        List<Character> secondaries = List.copyOf(battle.getDefenders().getActive());
         for (Character character : secondaries) {
             if (character != battle.getTarget()) character.takeDamage(currentAllDamage);
         }
