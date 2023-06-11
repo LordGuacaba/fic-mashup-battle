@@ -120,8 +120,15 @@ public class Battle implements CharacterObserver {
 
     @Override
     public void notifyObserver(Character character) {
-        if (character.turnState() == TurnState.KNOCKED_OUT) {
-            turnOrder.remove(character);
+        switch (character.turnState()) {
+            case KNOCKED_OUT:
+                turnOrder.remove(character);
+                if (character == target) {
+                    target = defenders.getActive().get(0);
+                }
+                break;
+            default:
+                break;
         }
     }
 

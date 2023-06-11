@@ -103,23 +103,26 @@ public class Team implements CharacterObserver {
     }
 
     public void clear() {
-        for (Character character : active) {
+        for (Character character : List.copyOf(active)) {
             character.leaveTeam();
         }
-        for (Character character : knockedOut) {
+        for (Character character : List.copyOf(knockedOut)) {
             character.leaveTeam();
         }
-        active.clear();
-        knockedOut.clear();
     }
 
     @Override
     public void notifyObserver(Character character) {
-        if (character.turnState() == TurnState.KNOCKED_OUT) {
-            knockOut(character);
-        } else if (character.turnState() == TurnState.NOT_BATTLING) {
-            active.remove(character);
-            knockedOut.remove(character);
+        switch (character.turnState()) {
+            case KNOCKED_OUT:
+                knockOut(character);
+                break;
+            case NOT_BATTLING:
+                active.remove(character);
+                knockedOut.remove(character);
+                break;
+            default:
+                break;
         }
     }
 
