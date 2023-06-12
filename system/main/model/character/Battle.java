@@ -123,6 +123,7 @@ public class Battle implements CharacterObserver {
         switch (character.turnState()) {
             case KNOCKED_OUT:
                 turnOrder.remove(character);
+                logger.logMessage(character.getName() + " has been knocked out!");
                 if (character == target && !defenders.defeated()) {
                     target = defenders.getActive().get(0);
                 }

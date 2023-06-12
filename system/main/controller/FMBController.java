@@ -61,7 +61,7 @@ public class FMBController {
      */
     public void addToTeam(Team team, Character character) {
         if (!team.addCharacter(character)) {
-            ui.putMessage(team.getTeamName() + " is full!");
+            ui.putMessage(character.getName() + " could not be added.");
         } else {
             ui.displayTeam(team);
         }

@@ -71,7 +71,7 @@ public class Team implements CharacterObserver {
     } 
 
     public boolean addCharacter(Character character, int position) {
-        if (active.size() > 4) {
+        if (active.size() > 4 || active.contains(character)) {
             return false;
         } else {
             active.add(position-1, character);
