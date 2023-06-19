@@ -1,0 +1,43 @@
+Welcome to Fiction Mashup Battle! Here is how to interact with the system:
+
+System Commands:
+
+search <type> <string>
+ - searches for and displays characters whose <type> contains the <string> you input
+ - <type> can be name (Graystripe, Garfield, etc.) or affiliation (Comic Crew, Imperial, etc.)
+
+view <number>
+ - displays a detailed description of the character with the given <number> on the most recently returned search list
+ - only works if you've made at least one search
+
+team <number>
+ - displays the team of the given number and selects this team for future team operations
+ - <number> is either 1 or 2
+ - you can switch teams selected by running the team command with the other number
+
+add <number>
+ - adds the character with the given <number> on the most recently returned search list to the selected team
+ - only works if you have made a search and a team is selected
+
+remove <number>
+ - removes the character with the given <number> position on the selected team from the team
+
+rename <new name>
+ - changes the name of the selected team to <new name>
+
+start <single/multiplayer>
+ - starts a singleplayer or multiplayer battle!
+
+quit
+ - quits the system
+
+Battle Commands (commands that only work during a battle):
+
+attack <type>
+ - the active player launches the attack of the specified type at the target
+ - <type> can be basic, super, or ultimate
+ - this command only works during a battle
+
+target <number>
+ - switches to target the character at the specified number position
+ - this command only works during a battle

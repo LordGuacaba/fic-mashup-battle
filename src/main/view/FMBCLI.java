@@ -1,5 +1,8 @@
 package src.main.view;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +79,23 @@ public class FMBCLI implements UserInterface {
         }
     }
 
+    public void displayHelp() {
+        String filepath = "src/main/view/instructions.txt";
+        try {
+            FileReader fileReader = new FileReader(filepath);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = reader.readLine();
+            }
+            reader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.out.println("oopsies with file system :(");
+        }
+    }
+
     private void runUI() {
         MessageLogger logger = MessageLogger.getInstance();
         logger.setUI(this);
@@ -121,7 +141,7 @@ public class FMBCLI implements UserInterface {
 
                 case "start":
                     if (args.length != 2) {
-                        putMessage("Init command has incorrect number of arguments.");
+                        putMessage("Start command has incorrect number of arguments.");
                     } else {
                         if (args[1].contains("multi")) {
                             controller.startBattle(true);
@@ -217,6 +237,10 @@ public class FMBCLI implements UserInterface {
                     break;
 
                 case "end":
+                    break;
+
+                case "help":
+                    displayHelp();
                     break;
 
                 case "quit":
