@@ -149,10 +149,14 @@ public class FMBController {
         battleSession.setTarget(character);
     }
 
-    public void exitBattle() {
-        battleSession.endBattle();
-        battleSession = null;
-        ui.putMessage("The battle has been ended.");
+    public void endBattle() {
+        try {
+            battleSession.endBattle();
+            battleSession = null;
+            ui.putMessage("The battle has been ended.");
+        } catch (NullPointerException e) {
+            ui.putMessage("No battle in progress");
+        }
     }
 
 

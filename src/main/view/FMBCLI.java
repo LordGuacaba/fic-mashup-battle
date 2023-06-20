@@ -237,6 +237,7 @@ public class FMBCLI implements UserInterface {
                     break;
 
                 case "end":
+                    controller.endBattle();
                     break;
 
                 case "help":

@@ -41,3 +41,6 @@ attack <type>
 target <number>
  - switches to target the character at the specified number position
  - this command only works during a battle
+
+end
+ - ends the battle in progress
