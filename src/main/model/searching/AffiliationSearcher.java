@@ -19,7 +19,7 @@ public class AffiliationSearcher implements Searcher {
         List<Character> results = new LinkedList<>();
         for (Character character : toSearch) {
             for (String affiliation : character.getAffiliations()) {
-                if (affiliation.contains(searchString)) {
+                if (affiliation.contains(searchString.toLowerCase())) {
                     results.add(character);
                 }
             }

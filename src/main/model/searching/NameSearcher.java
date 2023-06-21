@@ -20,7 +20,7 @@ public class NameSearcher implements Searcher {
     public List<Character> searchForCharacters(List<Character> toSearch, String searchString) {
         List<Character> results = new LinkedList<>();
         for (Character character : toSearch) {
-            if (character.getName().contains(searchString)) {
+            if (character.getName().contains(searchString.toLowerCase())) {
                 results.add(character);
             }
         }

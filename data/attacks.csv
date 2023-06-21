@@ -40,3 +40,15 @@ Bellatrix Lestrange,Crazy Witch Attack,Attack primary and adjacent targets for 1
 Thanos,Titan Bash,Attack primary target for 80% damage,1,1,Damage-0.8
 Thanos,Space Stone Punch,Attack primary target for 130% damage and gain evade,4,1,Damage-1.3
 Thanos,Power Slam,Attack all enemies for 200% damage,5,1,All-2
+Hobbes,Tiger Pounce,Attack primary target for 120% damage,1,1,Damage-1.2
+Hobbes,KAPOW!,Attack primary and adjacent targets for 120% damage,3,3,Splash-1.2-1.2
+Hobbes,Utility Fur Coat,Attack primary and adjacent targets for 170% damage and gain defense up,5,2,Splash-1.7-1.7
+Stoick the Vast,YAAAAAAAHHHHHH!,Attack primary target for 100% damage,1,1,Damage-1
+Stoick the Vast,Whirling Battle Axe,Attack primary and adjacent targets for 150% damage,3,3,Splash-1.5-1.5
+Stoick the Vast,Berserker Rage,Gain offense up and attack primary target for 250% damage,5,5,Damage-2.5
+Asterix,Gaulish Uppercut,Attack primary target for 100% damage,1,1,Damage-1
+Asterix,Several Bonks on the Head,Attack primary and adjacent targets for 180% damage,4,2,Splash-1.8-1.8
+Asterix,Magic Potion,Heal self for 400 health and gain offense up for 3 turns,7,7,Heal-400-0-self
+Obelix,BONK!,Attack primary target for 120% damage,1,1,Damage-1.2
+Obelix,Menhir Throw,Attack all enemies for 100% damage,3,0,All-1
+Obelix,PLAFF!,Attack primary target for 300% damage,4,4,Damage-3
