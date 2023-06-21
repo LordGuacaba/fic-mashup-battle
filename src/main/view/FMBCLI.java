@@ -198,11 +198,11 @@ public class FMBCLI implements UserInterface {
                     break;
 
                 case "rename":
-                    if (args.length != 2) {
+                    if (args.length < 2) {
                         putMessage("Rename command has incorrect number of arguments");
                     } else {
                         try {
-                            lastTeam.setTeamName(args[1]);
+                            lastTeam.setTeamName(line.split("rename ")[1]);
                         } catch (NullPointerException e) {
                             putMessage("Please select a team first");
                         }
