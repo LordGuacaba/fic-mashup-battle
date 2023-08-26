@@ -9,6 +9,7 @@ import java.util.Map;
 import src.main.controller.MessageLogger;
 import src.main.model.attacks.Attack;
 import src.main.model.effects.StatusEffect;
+import src.main.model.effects.StatusList;
 import src.main.model.exceptions.FMBException;
 /**
  * Represents a character in the fiction mashup battle. May battle other characters.
@@ -30,7 +31,7 @@ public class Character {
     private Map<AttackType, Attack> attacks;
 
     private TurnState turnState;
-    private List<StatusEffect> effects;
+    private StatusList effects;
     private List<CharacterObserver> observers;
     private MessageLogger logger;
 
@@ -57,7 +58,7 @@ public class Character {
         this.defenseMod = 1;
         this.attacks = new HashMap<>();
         this.turnState = TurnState.NOT_BATTLING;
-        this.effects = new LinkedList<>();
+        this.effects = new StatusList();
         this.observers = new LinkedList<>();
         this.logger = MessageLogger.getInstance();
     }
@@ -68,11 +69,7 @@ public class Character {
      * is in the correct state.
      */
     private void notifyEffects() {
-        for (StatusEffect effect : this.effects) {
-            if (effect.notify(this)) {
-                this.effects.remove(effect);
-            }
-        }
+        effects.notifyAll(this);
     }
 
     private void notifyObservers() {
@@ -173,7 +170,7 @@ public class Character {
         }
         notifyObservers();
         this.observers.clear();
-        this.effects.clear();
+        this.effects.clear();  // TODO: modify
     }
 
     /**
@@ -274,19 +271,31 @@ public class Character {
         }
     }
 
+    // StatusEffect Utils
+
+    /**
+     * Allows a {@link StatusEffect} to modify the character's attack.
+     * 
+     * @param mod The factor by which the character attack is modified.
+     */
+    public void modifyAttack(double mod) {
+        attackMod *= mod;
+    }
+
+    /**
+     * Allows a {@link StatusEffect} to modify the character's defense.
+     * 
+     * @param mod The factor by which the character defense is modified.
+     */
+    public void modifyDefense(double mod) {
+        defenseMod *= mod;
+    }
+
     @Override
     public String toString() {
         String out = name + ": " + attack + " attack power, " + speed + " speed, " + currentHealth + "/" + maxHealth + " HP\n";
         out += description + "\n";
-        if (this.effects.size() > 0) {
-            StringBuilder effectString = new StringBuilder();
-            for (StatusEffect effect : this.effects) {
-                effectString.append(effect);
-                effectString.append(" ");
-                }
-            effectString.append("\b");
-            out += effectString.toString() + "\n";
-        }
+        out += effects;
         return out;
     }
 
