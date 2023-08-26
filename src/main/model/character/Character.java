@@ -250,12 +250,16 @@ public class Character {
      * @param damage The damage to be done to the character.
      */
     public void takeDamage(int damage) {
+        turnState = TurnState.DEFENDING;
+        notifyObservers();
         this.currentHealth -= damage*defenseMod;
         if (currentHealth <= 0) {
             currentHealth = 0;
             this.turnState = TurnState.KNOCKED_OUT;
             this.notifyObservers();
         }
+        defenseMod = 1;
+        turnState = TurnState.RESTING;
     }
 
     /**

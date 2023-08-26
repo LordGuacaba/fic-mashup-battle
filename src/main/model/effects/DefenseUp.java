@@ -7,7 +7,7 @@ public class DefenseUp extends StatusEffect {
 
     @Override
     public boolean notify(Character character) {
-        if (character.turnState() == TurnState.ATTACKING) {
+        if (character.turnState() == TurnState.DEFENDING) {
             character.modifyDefense(1.5);
         }
         return false;
