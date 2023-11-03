@@ -170,7 +170,7 @@ public class Character {
         }
         notifyObservers();
         this.observers.clear();
-        this.effects.clear();  // TODO: modify
+        this.effects.clear();
     }
 
     /**
@@ -250,6 +250,7 @@ public class Character {
      * @param damage The damage to be done to the character.
      */
     public void takeDamage(int damage) {
+        TurnState previous = turnState;
         turnState = TurnState.DEFENDING;
         notifyObservers();
         this.currentHealth -= damage*defenseMod;
@@ -259,7 +260,7 @@ public class Character {
             this.notifyObservers();
         }
         defenseMod = 1;
-        turnState = TurnState.RESTING;
+        turnState = previous;
     }
 
     /**

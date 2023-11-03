@@ -13,11 +13,31 @@ public abstract class StatusEffect {
     private int stack;
     
     /**
+     * Initializes the Status Effect with a stack of 1.
+     * @param isPositive
+     */
+    public StatusEffect(boolean isPositive) {
+        this.stack = 1;
+        this.isPositive = isPositive;
+    }
+
+    /**
+     * Initializes the Status Effect.
+     * 
+     * @param stack
+     * @param isPositive
+     */
+    public StatusEffect(int stack, boolean isPositive) {
+        this.stack = stack;
+        this.isPositive = isPositive;
+    }
+
+    /**
      * Notifies the status effect of a {@link Character} change in {@link TurnState}. Applies this status effect
      * and returns true if appropriate, returns false otherwise.
      * 
      * @param character The character to potentially apply status effects to.
-     * @return true if the effect was applied, false otherwise.
+     * @return true if the effect was applied and should be removed, false otherwise.
      */
     public abstract boolean notify(Character character);
 

@@ -5,17 +5,20 @@ import src.main.model.character.TurnState;
 
 public class DefenseUp extends StatusEffect {
 
+    public DefenseUp() {
+        super(true);
+    }
+
+    public DefenseUp(int stack) {
+        super(stack, true);
+    }
+
     @Override
     public boolean notify(Character character) {
         if (character.turnState() == TurnState.DEFENDING) {
             character.modifyDefense(1.5);
         }
         return false;
-    }
-
-    @Override
-    public boolean isPositive() {
-        return true;
     }
 
     @Override

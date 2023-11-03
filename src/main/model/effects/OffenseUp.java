@@ -10,17 +10,20 @@ import src.main.model.character.TurnState;
  */
 public class OffenseUp extends StatusEffect {
 
+    public OffenseUp() {
+        super(true);
+    }
+
+    public OffenseUp(int stack) {
+        super(stack, true);
+    }
+
     @Override
     public boolean notify(Character character) {
         if (character.turnState() == TurnState.ATTACKING) {
             character.modifyAttack(1.5);
         }
         return false;
-    }
-
-    @Override
-    public boolean isPositive() {
-        return true;
     }
 
     @Override
